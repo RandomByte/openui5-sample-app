@@ -2,3 +2,17 @@ specVersion: '0.1'
 metadata:
   name: openui5-sample-app
 type: application
+builder:
+    customTasks:
+    - name: ponyInserter
+      beforeTask: uglify
+      configuration:
+        pattern: the
+---
+specVersion: "0.1"
+kind: extension
+type: task
+metadata:
+    name: ponyInserter
+task:
+    path: lib/tasks/ponyInserter.js

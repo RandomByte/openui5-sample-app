@@ -1,0 +1,7 @@
+/*!
+ * OpenUI5
+ * (c) Copyright 2026 SAP SE or an SAP affiliate company.
+ * Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
+ */
+sap.ui.define(["sap/ui/Device","sap/ui/thirdparty/jquery","sap/ui/dom/isHidden","./hasTabIndex"],function(e,jQuery,t){"use strict";const i=new WeakMap;function l(t){if(e.browser.safari){return false}if(i.has(t)){const e=i.get(t);if(e.scrollHeight===t.scrollHeight&&e.scrollWidth===t.scrollWidth&&e.clientHeight===t.clientHeight&&e.clientWidth===t.clientWidth){return e.isScrollable}}try{const e=getComputedStyle(t);if(!e){return false}const l=t.scrollWidth>t.clientWidth&&["scroll","auto"].includes(e.overflowX);const r=t.scrollHeight>t.clientHeight&&["scroll","auto"].includes(e.overflowY);const n=l||r;i.set(t,{isScrollable:n,scrollHeight:t.scrollHeight,scrollWidth:t.scrollWidth,clientHeight:t.clientHeight,clientWidth:t.clientWidth});return n}catch(e){return false}}function r(e,i,n){let s,c;const o=!!n?.includeSelf,u=!!n?.includeScroller;if(o){s=e}else{s=i?e.firstChild:e.lastChild}while(s){if(s.nodeType==1&&!t(s)){if(jQuery(s).hasTabIndex()){return s}c=r(s,i,{includeScroller:u});if(u&&!c&&l(s)){return s}if(c){return c}}if(o){break}s=i?s.nextSibling:s.previousSibling}return null}jQuery.fn.firstFocusableDomRef=function(e){var i=this.get(0);if(!i||t(i)){return null}return r(i,true,e)};jQuery.fn.lastFocusableDomRef=function(e){var i=this.get(0);if(!i||t(i)){return null}return r(i,false,e)};return jQuery});
+//# sourceMappingURL=Focusable.js.map
